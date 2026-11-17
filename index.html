@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Parhum — پورتفولیو</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#000;--bg2:#070707;--line:rgba(255,255,255,.09);
+  --text:#ededed;--muted:#8b8b8b;--accent:#39ff88;--accent-soft:rgba(57,255,136,.06);
+  --glass:rgba(18,18,18,.55);--glass-line:rgba(255,255,255,.14);
+  --font:'Vazirmatn',Tahoma,sans-serif;--display:'Syne','Vazirmatn',sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--text:#ededed}}
+:root[data-theme="dark"]{--bg:#000;--text:#ededed}
+html{scroll-behavior:auto;background:var(--bg);-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:14.5px;line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(520px 520px at 50% 28%,rgba(255,255,255,.035),transparent 70%)}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+section{padding:96px clamp(16px,5vw,40px);max-width:1120px;margin:0 auto}
+.panel{background:rgba(16,16,16,.5);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border:1px solid var(--glass-line);border-radius:28px;padding:clamp(22px,4.5vw,52px);box-shadow:0 20px 60px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07)}
+.panel .stat,.panel .card,.panel .links a,.panel input,.panel textarea{background:rgba(255,255,255,.03)}
+section:not(#home) .panel{background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0;border-radius:0}
+h2{font-size:clamp(21px,3vw,28px);font-weight:700;margin:0 0 10px;line-height:1.3}
+.lead{color:var(--muted);font-size:13.5px;max-width:520px;margin:0 0 30px}
+
+/* Glass nav */
+.glass{background:var(--glass);backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);border:1px solid var(--glass-line);box-shadow:0 10px 40px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08)}
+.top{position:fixed;top:0;left:0;right:0;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;direction:ltr;padding:calc(14px + env(safe-area-inset-top,0px)) clamp(14px,3.5vw,36px) 18px;pointer-events:none}
+.top::before{content:"";position:absolute;inset:0;background:linear-gradient(#000 35%,transparent);z-index:-1}
+.top>*{pointer-events:auto}
+.nav-d{position:relative;display:flex;gap:4px;padding:6px;border-radius:999px;direction:rtl}
+.brand{justify-self:start;font-family:var(--display);font-weight:800;font-size:clamp(15px,2vw,17px);letter-spacing:.3px}
+.brand span{color:var(--accent)}
+.gbtn{justify-self:end;display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;font-size:13px;font-weight:500;direction:rtl;transition:.25s;white-space:nowrap}
+.gbtn::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.gbtn:hover{border-color:rgba(57,255,136,.6)}
+.nav-d a.l{padding:7px 15px;border-radius:999px;font-size:13px;color:var(--muted);transition:.25s}
+.nav-d a.l:hover{color:var(--text)}
+.nav-d a.l.on,.nav-m a.on{color:var(--accent)}
+.ind{position:absolute;left:0;top:0;width:0;height:0;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 6px 20px rgba(0,0,0,.45);pointer-events:none;opacity:0;z-index:0;transition:opacity .3s}
+.ind.show{opacity:1}
+.ind.anim{transition:transform .6s cubic-bezier(.3,1.4,.4,1),width .6s cubic-bezier(.3,1.4,.4,1),height .6s cubic-bezier(.3,1.4,.4,1),opacity .3s}
+.nav-m .ind{border-radius:19px}
+.nav-d a.l,.nav-m a{position:relative;z-index:1}
+.nav-m{display:none;position:fixed;z-index:50;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:8px;border-radius:26px;justify-content:space-between;gap:4px}
+.nav-m a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;border-radius:19px;font-size:11px;color:var(--muted);line-height:1.5;transition:.25s}
+.nav-m svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:760px){.top{grid-template-columns:1fr auto}.nav-d{display:none}.nav-m{display:flex}section{padding:56px 16px}body{padding-bottom:104px}.panel{border-radius:22px}.gbtn{padding:7px 14px;font-size:12px}.btn{padding:10px 20px}.stat{padding:16px 14px}.stat b{font-size:22px}input,textarea{font-size:16px}.card .in{padding:18px}.links a{padding:16px 18px}footer{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}}
+
+/* Hero */
+#home{max-width:none;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;padding:100px 14px 110px;margin:0}
+#home::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at center,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at center,#000 10%,transparent 70%)}
+.spot{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,var(--accent-soft),transparent 65%);left:50%;top:45%;transform:translate(-50%,-50%);pointer-events:none;transition:left .25s ease-out,top .25s ease-out}@media (hover:none){.spot{display:none}}
+.hero-panel{position:relative;width:100%;max-width:760px;padding:clamp(24px,5vw,48px) clamp(16px,4vw,40px)}
+.hello{position:relative;color:var(--muted);font-size:clamp(13px,1.6vw,15px);margin-bottom:4px}
+.name{position:relative;direction:ltr;font-family:var(--display);font-weight:800;font-size:clamp(40px,11.5vw,112px);line-height:.95;margin:0;letter-spacing:-.03em;color:var(--text)}
+.name span.o{color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.85)}
+.name .dot{display:inline-block;width:.1em;height:.1em;background:var(--accent);border-radius:50%;margin-left:.04em;box-shadow:0 0 30px var(--accent);animation:blink 1.6s steps(2,start) infinite}
+@keyframes blink{50%{opacity:.15}}
+.role{position:relative;margin:18px auto 26px;font-size:clamp(13.5px,1.7vw,16px);color:#bdbdbd;max-width:460px}
+.cta{position:relative;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{padding:10px 22px;border-radius:999px;font-weight:500;font-size:13.5px;border:1px solid var(--glass-line);transition:.25s;cursor:pointer;font-family:inherit;color:var(--text);background:transparent}
+.btn.p{background:#f2f2f2;color:#000;border-color:#f2f2f2}
+.btn.p:hover{box-shadow:0 0 24px rgba(57,255,136,.18);transform:translateY(-2px)}
+.btn:not(.p):hover{border-color:var(--accent);color:var(--accent)}
+.scroll{position:absolute;bottom:calc(30px + env(safe-area-inset-bottom,0px));left:50%;width:1px;height:46px;background:linear-gradient(var(--accent),transparent);opacity:.7}
+@media (max-width:760px){.scroll{display:none}}
+
+/* About */
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:50px;align-items:start}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+.about p{color:#bdbdbd;margin:0 0 16px}
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.skills span{padding:3px 12px;border:1px solid var(--line);border-radius:999px;color:#bbb;direction:ltr;font-family:var(--font);font-weight:500;font-size:11.5px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{padding:26px 22px;border:1px solid var(--line);border-radius:20px;background:var(--bg2)}
+.stat b{display:block;font-family:var(--font);font-weight:700;font-size:26px;line-height:1.2;direction:ltr;text-align:right}
+.stat.hi b{color:var(--text)}
+.stat small{color:var(--muted);font-size:12px}
+
+/* Works */
+.works{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:16px}
+.card{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:22px;background:var(--bg2);overflow:hidden;transition:.3s}
+.card:hover{border-color:rgba(255,255,255,.28);transform:translateY(-3px)}
+.thumb{height:140px;position:relative;border-bottom:1px solid var(--line);overflow:hidden;background:#050505}
+.thumb svg{width:100%;height:100%;display:block}
+.card .in{padding:22px}
+.card h3{margin:0 0 4px;font-size:15px}
+.card p{margin:0 0 12px;color:var(--muted);font-size:12.5px;line-height:1.8}
+.tags{display:flex;gap:8px;flex-wrap:wrap;direction:ltr;justify-content:flex-end}
+.tags span{font-size:11px;color:#aaa;border:1px solid var(--line);padding:1px 9px;border-radius:999px}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+.links{display:flex;flex-direction:column;gap:12px}
+.links a{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border:1px solid var(--line);border-radius:18px;background:var(--bg2);transition:.25s}
+.links a:hover{border-color:rgba(255,255,255,.3)}
+.links a span:last-child{color:var(--muted);direction:ltr;font-size:12.5px}
+form{display:flex;flex-direction:column;gap:12px}
+input,textarea{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--text);padding:12px 16px;border-radius:14px;font:inherit;font-size:14px;transition:.25s}
+input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+textarea{min-height:140px;resize:vertical}
+#msg{min-height:24px;color:var(--accent);font-size:14px;margin:0}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 20px 40px;border-top:1px solid var(--line)}
+body{line-height:2}
+h2,.role,.lead{text-wrap:balance}
+p{text-wrap:pretty}
+.about p{max-width:58ch;line-height:2.05}
+.skills span{font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.2px}
+.stat b{font-family:var(--display);font-weight:800}
+section:not(#home){border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top">
+<a class="brand" href="#home">Parhum<span>.dev</span></a>
+<nav class="nav-d glass" aria-label="منوی اصلی"><span class="ind"></span>
+  <a class="l on" href="#home" data-s="home">خانه</a>
+  <a class="l" href="#about" data-s="about">درباره من</a>
+  <a class="l" href="#works" data-s="works">نمونه کارها</a>
+  <a class="l" href="#contact" data-s="contact">تماس با من</a>
+</nav>
+<a class="gbtn glass" href="#contact">شروع همکاری</a>
+</header>
+
+<nav class="nav-m glass" aria-label="منوی موبایل"><span class="ind"></span>
+  <a class="on" href="#home" data-s="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>خانه</a>
+  <a href="#about" data-s="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>درباره من</a>
+  <a href="#works" data-s="works"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>نمونه کارها</a>
+  <a href="#contact" data-s="contact"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>تماس</a>
+</nav>
+
+<main>
+<section id="home">
+  <div class="spot" id="spot"></div>
+  <div class="panel hero-panel"><div class="hello">سلام، من</div>
+  <h1 class="name"><span class="o">Par</span>hum<span class="dot"></span></h1>
+  <p class="role">طراح و توسعه‌دهنده وب. رابط‌هایی می‌سازم که سریع، تمیز و به‌یادماندنی‌اند.</p>
+  <div class="cta">
+    <a class="btn p" href="#works">دیدن نمونه کارها</a>
+    <a class="btn" href="#contact">با من حرف بزن</a>
+  </div>
+  </div><div class="scroll"></div>
+</section>
+
+<section id="about"><div class="panel">
+  <h2>درباره من</h2>
+  <p class="lead">یک نگاه کوتاه به اینکه کی هستم و چطور کار می‌کنم.</p>
+  <div class="about">
+    <div>
+      <p>من پرهوم هستم؛ طراح و برنامه‌نویس وب. عاشق ساخت سایت‌هایی هستم که هم ظاهر جدی و حرفه‌ای دارند و هم زیر پوستشان کد تمیز و سریع است.</p>
+      <p>از ایده و طراحی رابط کاربری تا پیاده‌سازی و انتشار، کل مسیر را خودم جلو می‌برم تا نتیجه دقیقاً همان چیزی شود که در ذهن مشتری بوده.</p>
+      <div class="skills"><span>HTML / CSS</span><span>JavaScript</span><span>React</span><span>UI Design</span><span>Figma</span><span>Node.js</span></div>
+    </div>
+    <div class="stats">
+      <div class="stat hi"><b>+30</b><small>پروژه تحویل‌شده</small></div>
+      <div class="stat"><b>+4</b><small>سال تجربه</small></div>
+      <div class="stat"><b>100%</b><small>ریسپانسیو</small></div>
+      <div class="stat"><b>24h</b><small>زمان پاسخ‌گویی</small></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="works"><div class="panel">
+  <h2>نمونه کارها</h2>
+  <p class="lead">چند پروژه از کارهایی که با افتخار ساخته‌ام.</p>
+  <div class="works">
+    <article class="card">
+      <div class="thumb"><svg viewBox="0 0 300 190" preserveAspectRatio="xMidYMid slice"><rect width="300" height="190" fill="#050505"/><rect x="30" y="30" width="240" height="14" rx="7" fill="#1a1a1a"/><rect x="30" y="62" width="150" height="46" rx="8" fill="#262626"/><rect x="190" y="62" width="80" height="46" rx="8" fill="#161616"/><rect x="30" y="120" width="240" height="40" rx="8" fill="#101010"/></svg></div>
+      <div class="in"><h3>فروشگاه آنلاین مدرن</h3><p>طراحی و توسعه یک فروشگاه سریع با سبد خرید و پرداخت آنلاین.</p><div class="tags"><span>React</span><span>Node</span></div></div>
+    </article>
+    <article class="card">
+      <div class="thumb"><svg viewBox="0 0 300 190" preserveAspectRatio="xMidYMid slice"><rect width="300" height="190" fill="#050505"/><g fill="#161616"><rect x="30" y="30" width="60" height="130" rx="8"/><rect x="104" y="30" width="166" height="60" rx="8"/></g><polyline points="110,150 150,125 185,140 225,105 265,115" fill="none" stroke="#39ff88" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="in"><h3>داشبورد مدیریت</h3><p>پنل تحلیل داده با نمودارهای زنده و حالت تاریک کامل.</p><div class="tags"><span>JavaScript</span><span>Charts</span></div></div>
+    </article>
+    <article class="card">
+      <div class="thumb"><svg viewBox="0 0 300 190" preserveAspectRatio="xMidYMid slice"><rect width="300" height="190" fill="#050505"/><rect x="95" y="20" width="110" height="150" rx="16" fill="#101010" stroke="#262626"/><rect x="108" y="40" width="84" height="40" rx="8" fill="#262626"/><rect x="108" y="92" width="84" height="12" rx="6" fill="#1c1c1c"/><rect x="108" y="112" width="60" height="12" rx="6" fill="#1c1c1c"/></svg></div>
+      <div class="in"><h3>اپلیکیشن وب موبایل‌محور</h3><p>تجربه‌ای روان شبیه اپ نیتیو که روی هر گوشی عالی کار می‌کند.</p><div class="tags"><span>PWA</span><span>UI/UX</span></div></div>
+    </article>
+    <article class="card">
+      <div class="thumb"><svg viewBox="0 0 300 190" preserveAspectRatio="xMidYMid slice"><rect width="300" height="190" fill="#050505"/><text x="150" y="112" text-anchor="middle" font-size="54" font-weight="800" fill="none" stroke="#fff" stroke-width="1.5" font-family="Syne,sans-serif">BRAND</text><circle cx="248" cy="96" r="5" fill="#39ff88"/></svg></div>
+      <div class="in"><h3>سایت معرفی برند</h3><p>وب‌سایت شرکتی با هویت بصری قوی و سئوی بهینه.</p><div class="tags"><span>Branding</span><span>SEO</span></div></div>
+    </article>
+  </div>
+</div></section>
+
+<section id="contact"><div class="panel">
+  <h2>تماس با من</h2>
+  <p class="lead">پروژه‌ای در ذهن داری؟ پیام بده تا درباره‌اش حرف بزنیم.</p>
+  <div class="contact">
+    <div class="links">
+      <a href="mailto:hello@parhum.dev"><span>ایمیل</span><span>hello@parhum.dev</span></a>
+      <a href="https://t.me/parhum" target="_blank" rel="noopener"><span>تلگرام</span><span>@parhum</span></a>
+      <a href="https://github.com/parhum" target="_blank" rel="noopener"><span>گیت‌هاب</span><span>github.com/parhum</span></a>
+    </div>
+    <form id="f">
+      <input id="n" placeholder="نام شما" required aria-label="نام">
+      <input id="e" type="email" placeholder="ایمیل شما" required aria-label="ایمیل" style="direction:ltr;text-align:right">
+      <textarea id="m" placeholder="پیام شما" required aria-label="پیام"></textarea>
+      <button class="btn p" type="submit">ارسال پیام</button>
+      <p id="msg" role="status"></p>
+    </form>
+  </div>
+</div></section>
+</main>
+<footer>© 2026 Parhum. همه حقوق محفوظ است.</footer>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var cur=0,target=0,raf=0,last=0;
+  function maxY(){return Math.max(0,document.documentElement.scrollHeight-innerHeight)}
+  function tick(t){
+    var dt=Math.min(50,t-last);last=t;
+    cur+=(target-cur)*(1-Math.exp(-dt/1000*7));
+    if(Math.abs(target-cur)<0.4){cur=target;scrollTo(0,cur);raf=0;lock=false;return}
+    scrollTo(0,cur);raf=requestAnimationFrame(tick);
+  }
+  function go(y){
+    target=Math.max(0,Math.min(maxY(),y));
+    if(reduce){scrollTo(0,target);lock=false;return}
+    if(!raf){cur=scrollY;last=performance.now();raf=requestAnimationFrame(tick)}
+  }
+  function stop(){lock=false;if(raf){cancelAnimationFrame(raf);raf=0}}
+  addEventListener('touchstart',stop,{passive:true});
+  addEventListener('mousedown',stop);
+  addEventListener('keydown',stop);
+  if(fine&&!reduce){
+    addEventListener('wheel',function(e){
+      if(e.ctrlKey||(e.target.closest&&e.target.closest('textarea')))return;
+      e.preventDefault();
+      go((raf?target:scrollY)+e.deltaY*(e.deltaMode===1?32:1));
+    },{passive:false});
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var el=document.getElementById(a.getAttribute('href').slice(1));
+      if(!el)return;
+      e.preventDefault();
+      lock=true;setActive(el.id);go(el.getBoundingClientRect().top+scrollY);
+    });
+  });
+
+  var links=document.querySelectorAll('[data-s]');
+  var lock=false;
+  function moveInd(){
+    document.querySelectorAll('nav.glass').forEach(function(nav){
+      var ind=nav.querySelector('.ind'),a=nav.querySelector('a.on');
+      if(!ind||!a)return;
+      var nr=nav.getBoundingClientRect(),ar=a.getBoundingClientRect();
+      if(!nr.width||!ar.width)return;
+      ind.style.width=ar.width+'px';ind.style.height=ar.height+'px';
+      ind.style.transform='translate('+(ar.left-nr.left-nav.clientLeft)+'px,'+(ar.top-nr.top-nav.clientTop)+'px)';
+      ind.classList.add('show');
+      if(!ind.classList.contains('anim'))setTimeout(function(){ind.classList.add('anim')},80);
+    });
+  }
+  function setActive(id){
+    links.forEach(function(l){l.classList.toggle('on',l.dataset.s===id)});
+    moveInd();
+  }
+  addEventListener('resize',moveInd);
+  addEventListener('load',moveInd);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(moveInd);
+  moveInd();
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        if(!lock)setActive(e.target.id);
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('main section').forEach(function(s){io.observe(s)});
+
+  var hero=document.getElementById('home'),spot=document.getElementById('spot');
+  hero.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse')return;
+    var r=hero.getBoundingClientRect();
+    spot.style.left=(e.clientX-r.left)+'px';spot.style.top=(e.clientY-r.top)+'px';
+  });
+
+  document.getElementById('f').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var n=document.getElementById('n').value,m=document.getElementById('m').value,e=document.getElementById('e').value;
+    var body=encodeURIComponent(m+'\n\n— '+n+' ('+e+')');
+    document.getElementById('msg').textContent='در حال باز کردن برنامه ایمیل شما…';
+    window.location.href='mailto:hello@parhum.dev?subject='+encodeURIComponent('پیام از سایت پورتفولیو')+'&body='+body;
+  });
+})();
+</script>
+</body>
+</html>
